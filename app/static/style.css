@@ -1,0 +1,21 @@
+#header {
+  text-align: center;
+  font-size: 64px;
+}
+
+#endpointHeader {
+  text-align: left;
+  font-size: 24;
+}
+
+.dark {
+  color: #A27B5C;
+  background-color: #2C3639;
+}
+
+.endpoint {
+  background-color: #3F4E4F;
+  margin: 2% 10%;
+  padding: 3px 10px;
+}
+

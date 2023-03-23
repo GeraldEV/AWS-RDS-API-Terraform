@@ -1,0 +1,88 @@
+<html class="dark">
+  <head>
+    <title>Artists API</title>
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}" />
+  </head>
+
+  <body>
+    <div id="header">Artists API Home</div>
+    <br>
+
+    <div class="endpoint">
+      <p>
+      This page describes the endpoints of this Artists API!<br>
+      It's not the prettiest but it gets the job done!<br>
+      Note to self: This really should be a Swagger interface
+      </p>
+    </div>
+
+    <div>
+      <div id="endpointHeader" class="endpoint">
+        <h2>Endpoints</h2>
+      </div>
+
+      <div class="endpoint">
+        <p><strong><p>GET /</p></strong>
+        <p>This page!</p>
+      </div>
+
+      <div class="endpoint">
+        <p><strong>GET /ping</strong></p>
+        <p>
+        Endpoint for reachability checks.<br>
+        <strong>Response:</strong> HTML with body containing only "pong" and an HTTP 200 status code.
+        </p>
+      </div>
+
+      <div class="endpoint">
+        <p><strong>GET /health</strong></p>
+        <p>
+        Endpoint for health check. API confirms it can communicate with it's dependencies.<br>
+        <strong>Response:</strong> JSON object body with the status of the API and an HTTP 200 status code.
+        </p>
+      </div>
+
+      <div class="endpoint">
+        <p><strong>GET /artists</strong>
+        <p>
+        All artists currently entered in the database.<br>
+        <strong>Response:</strong> JSON List data for each artist with name and id.
+        </p>
+      </div>
+
+      <div class="endpoint">
+        <p><strong>POST /artists</strong>
+        <p>
+        Add a new artist into the database. Expects JSON body of form: {"artist": "&lt;name&gt;"}<br>
+        <strong>Response:</strong> JSON object for the created entry and an HTTP 201 status code, JSON object for an already existing artist or JSON object describing error and an HTTP 400 status code otherwise.
+        </p>
+      </div>
+
+      <div class="endpoint">
+        <p><strong>GET /artists/&lt;int: id&gt;</strong>
+        <p>
+        Artist with ID matching &lt;int: id&gt;<br>
+        <strong>Response:</strong> JSON object for the entry and an HTTP 200 status code or JSON object describing error and an HTTP 400 status code otherwise.
+        </p>
+      </div>
+
+      <div class="endpoint">
+        <p><strong>GET /artists/&lt;int: id&gt;</strong>
+        <p>
+        Update artist with ID matching &lt;int: id&gt;<br>
+        <strong>Response:</strong> JSON object for the entry and an HTTP 200 status code or JSON object describing error and an HTTP 400 status code otherwise.
+        </p>
+      </div>
+
+      <div class="endpoint">
+        <p><strong>DELETE /artists/&lt;int: id&gt;</strong>
+        <p>
+        Delete artist with ID matching &lt;int: id&gt;<br>
+        <strong>Response:</strong> HTTP 204 status code or JSON object describing error and an HTTP 400 status code otherwise.
+        </p>
+      </div>
+    </div>
+  </body>
+</html>
+
