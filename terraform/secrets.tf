@@ -1,5 +1,10 @@
+resource "random_string" "secret_name" {
+  length  = 16
+  special = false
+}
+
 resource "aws_secretsmanager_secret" "rds_credentials" {
-  name = var.secret_name
+  name = random_string.secret_name.result
 }
 
 resource "aws_secretsmanager_secret_version" "rds_credentials" {

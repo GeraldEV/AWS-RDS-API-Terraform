@@ -91,13 +91,6 @@ variable "service_specs" {
   nullable = false
 }
 
-variable "secret_name" {
-  description = "Secret name in secret manager"
-
-  type     = string
-  nullable = false
-}
-
 variable "db_name" {
   description = "Named database to be created"
 

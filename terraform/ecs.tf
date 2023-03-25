@@ -39,7 +39,7 @@ resource "aws_ecs_task_definition" "service" {
     environment = [
       {
         "name" : "SECRET_NAME",
-        "value" = var.secret_name
+        "value" = aws_secretsmanager_secret.rds_credentials.name
       },
       {
         "name" : "SECRET_REGION",
@@ -66,10 +66,10 @@ resource "aws_ecs_task_definition" "service" {
   }
 }
 
-resource "aws_ecs_service" "aws-ecs-service" {
+resource "aws_ecs_service" "service_a" {
   depends_on = [aws_db_instance.main]
 
-  name                 = "ecs-service"
+  name                 = "ecs_service_a"
   cluster              = aws_ecs_cluster.main.id
   task_definition      = aws_ecs_task_definition.service.family
   launch_type          = "FARGATE"
@@ -77,8 +77,40 @@ resource "aws_ecs_service" "aws-ecs-service" {
   desired_count        = 1
   force_new_deployment = true
 
+  load_balancer {
+    target_group_arn = aws_lb_target_group.main.arn
+    container_name   = var.service_specs.name
+    container_port   = var.ingress_specs.port
+  }
+
   network_configuration {
     subnets          = [aws_subnet.public_a.id]
+    assign_public_ip = true
+    security_groups = [
+      aws_security_group.main.id
+    ]
+  }
+}
+
+resource "aws_ecs_service" "service_b" {
+  depends_on = [aws_db_instance.main]
+
+  name                 = "ecs_service_b"
+  cluster              = aws_ecs_cluster.main.id
+  task_definition      = aws_ecs_task_definition.service.family
+  launch_type          = "FARGATE"
+  scheduling_strategy  = "REPLICA"
+  desired_count        = 1
+  force_new_deployment = true
+
+  load_balancer {
+    target_group_arn = aws_lb_target_group.main.arn
+    container_name   = var.service_specs.name
+    container_port   = var.ingress_specs.port
+  }
+
+  network_configuration {
+    subnets          = [aws_subnet.public_b.id]
     assign_public_ip = true
     security_groups = [
       aws_security_group.main.id

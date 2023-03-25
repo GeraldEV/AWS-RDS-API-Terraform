@@ -1,7 +1,5 @@
 my_network = "<your network IP address here>"
 
-secret_name = "my_secret"
-
 db_name = "artists"
 
 service_specs = {
